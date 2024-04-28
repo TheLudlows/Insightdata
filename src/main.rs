@@ -1,3 +1,5 @@
+mod storage;
+
 use sqlparser::ast::Statement;
 use sqlparser::dialect::PostgreSqlDialect;
 use sqlparser::parser::{Parser, ParserError};
@@ -8,7 +10,6 @@ fn main() -> Result<()> {
         println!("{:?}", res.err())
     } else {
         for stat in res.unwrap() {
-            stat.
             println!("{}", stat)
         }
     }
@@ -16,5 +17,5 @@ fn main() -> Result<()> {
 }
 pub fn parse(sql: impl Into<String>) -> Result<Vec<Statement>, ParserError> {
     let dialect = PostgreSqlDialect{};
-    Parser::parse_sql(&dialect, sql.into())
+    Parser::parse_sql(&dialect, &sql.into())
 }
