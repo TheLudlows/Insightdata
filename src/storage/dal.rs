@@ -1,4 +1,3 @@
-use std::collections::{BTreeSet, HashMap};
 use anyhow::Result;
 use opendal::services::{Fs};
 use opendal::Operator;
@@ -18,9 +17,4 @@ async fn main() -> Result<()> {
     let r = op.read_with("abc").range(0..123).await?;
     println!("{:?}", r);
     Ok(())
-}
-
-#[test]
-fn test1() {
-   let mut vec = Vec::new_in()
 }

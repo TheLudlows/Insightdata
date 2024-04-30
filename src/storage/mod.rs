@@ -5,17 +5,16 @@ use crate::catalog::{ColumnCatalog, ColumnId, TableId};
 
 mod dal;
 
-pub trait Storage: Sync + Send{
-
-    async fn create_table(
+pub trait Storage: Sync + Send {
+    fn create_table(
         &self,
         table_id: TableId,
         table_name: &str,
         columns: &[ColumnCatalog],
         pk_ids: &[ColumnId],
-    ) -> Result<()>;
+    ) -> impl Future<Output=Result<()>>;
 
-    async fn get_table(&self, table_id: TableId) -> Result<Table>;
+    fn get_table(&self, table_id: TableId) -> impl Future<Output=Result<Table>>;
 
-    async fn drop_table(&self, table_id: TableId) -> Result<Table>;
+    fn drop_table(&self, table_id: TableId) -> impl Future<Output=Result<Table>>;
 }
