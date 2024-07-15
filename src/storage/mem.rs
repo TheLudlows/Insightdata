@@ -8,7 +8,7 @@ use arrow::array::RecordBatch;
 
 pub struct MemStorage {
     root_catalog: Arc<RootCatalog>,
-    tables: Mutex<HashMap<SchemaTableId, MemTable>>
+    tables: Arc<Mutex<HashMap<SchemaTableId, MemTable>>>
 }
 pub struct MemTable {
     pub schema_table_id: SchemaTableId,
@@ -46,8 +46,10 @@ impl Storage for MemStorage {
     type TableType = MemTable;
 
     async fn create_table(&self, table: &TableCatalog) -> Result<()> {
-        self.root_catalog.get_table_by_id(&table.id).ok_or_else(||)
-        let tables = self.tables.lock();
+        //self.root_catalog.get_table_by_id(&table.id).ok_or_else(||)
+        let mut  tables = self.tables.lock().unwrap();
+
+        Ok(())
     }
 
     async fn get_table(&self, table_id: SchemaTableId) ->Result<Self::TableType> {

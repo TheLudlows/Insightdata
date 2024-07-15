@@ -19,7 +19,8 @@ pub struct RootCatalog {
 
 impl RootCatalog {
     pub fn get_table_by_id(&self, id: &SchemaTableId) -> Option<Arc<TableCatalog>> {
-        let schema_catalog = self.inner.lock().unwrap().schemas.get(&id.schema_id)?;
+        let root = self.inner.lock().unwrap();
+        let schema_catalog = root.schemas.get(&id.schema_id)?;
         schema_catalog.get_table(&id.table_id)
     }
     pub fn get_schema_by_id(&self,id: SchemaId) -> Option<Arc<SchemaCatalog>> {
