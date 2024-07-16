@@ -1,8 +1,7 @@
-use std::cmp::Reverse;
-use std::collections::{BinaryHeap, BTreeSet, HashMap};
+
 use anyhow::Result;
 use opendal::services::{Fs};
-use opendal::Operator;
+use opendal::{Builder, Operator};
 
 #[tokio::test]
 async fn main() -> Result<()> {
@@ -11,7 +10,8 @@ async fn main() -> Result<()> {
     // Set the root for fs, all operations will happen under this root.
     //
     // NOTE: the root must be absolute path.
-    builder.root("/tmp");
+    builder.root("d:/test_data");
+    let acc =  builder.build()?;
     // `Accessor` provides the low level APIs, we will use `Operator` normally.
     let op: Operator = Operator::new(builder)?.finish();
     op.write("abc", "abc").await?;

@@ -9,6 +9,8 @@ use crate::types::DataValue;
 
 mod dal;
 mod mem;
+mod arrow_test;
+mod parquet_read;
 
 pub trait Storage: Sync + Send {
     type TableType: Table;

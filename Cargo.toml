@@ -13,8 +13,9 @@ tokio = { version = "1.37.0", features = ["rt", "rt-multi-thread", "macros"] }
 rand = { version = "0.8.5", features = [] }
 serde = { version = "1.0.199", features = ["derive"] }
 serde_json = "1.0.116"
-arrow = "50.0.0"
+arrow = { version = "52.0.0", features = ["default"] }
+parquet = "52"
 parse-display = "0.9.0"
 chrono = "0.4.34"
 thiserror = "1.0.57"
-datafusion = "39.0.0"
+datafusion = { version = "40.0.0", features = ["default"] }
